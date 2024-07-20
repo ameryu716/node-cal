@@ -123,14 +123,6 @@ export class ConsoleCalendar {
             .map((day_number, _i) => {
               // 桁違いによる文字数を揃える
               const day_string = this.#dateEngraving(day_number)
-              // isSunday
-              if (_i === 0) return chalk.red(day_string)
-              // isSaturday
-              if (_i === 6) return chalk.blue(day_string)
-              // isHoliday
-              if (holiday_map.has(`${target_year}/${target_month.text}/${day_number}`)) {
-                return chalk.red(day_string)
-              }
               // isToday
               if (
                 day_number === today.getDate() &&
@@ -138,6 +130,14 @@ export class ConsoleCalendar {
                 target_year === today.getFullYear()
               ) {
                 return chalk.yellow(day_string)
+              }
+              // isSunday
+              if (_i === 0) return chalk.red(day_string)
+              // isSaturday
+              if (_i === 6) return chalk.blue(day_string)
+              // isHoliday
+              if (holiday_map.has(`${target_year}/${target_month.text}/${day_number}`)) {
+                return chalk.red(day_string)
               }
               return day_string
             })

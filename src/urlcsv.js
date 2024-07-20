@@ -1,5 +1,4 @@
 import * as fs from 'fs'
-// const fs = require('fs')
 
 export class URLCSV {
   async * #makeTextFileLineIterator(fileURL, charCode) {
