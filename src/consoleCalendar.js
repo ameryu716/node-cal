@@ -1,5 +1,5 @@
-import { URLCSV } from "./urlcsv.js";
-import chalk from 'chalk';
+import { URLCSV } from "./urlcsv.js"
+import chalk from 'chalk'
 import * as fs from 'fs'
 
 export class ConsoleCalendar {
@@ -15,18 +15,18 @@ export class ConsoleCalendar {
   // 祝日データ取得
   #getHolidayMap = async (target_year, target_month, refresh = false) => {
     const url_csv = new URLCSV()
-    const json_path = 'downloads/holiday.json'
+    const dir_name = import.meta.dirname + '/downloads/'
+    const json_path = dir_name + 'holiday.json'
     // 祝日データが保存されてないか、リフレッシュする場合はURLからCSVをロードし、JSON変換する。
     if (refresh || !fs.existsSync(json_path)) {
-      console.log('🔄 CSV fetch from gov... 🗓️');
-      const dir_name = json_path.split('/')[0]
+      console.log('🔄 CSV fetch from gov... 🗓️')
       if (!fs.existsSync(dir_name)) {
         fs.mkdirSync(dir_name)
       }
       // 👇名前気持ち悪すぎだろ...
       const csv_url = 'https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv'
       const char_code = "shift-jis"
-      await url_csv.fetchAsJson(csv_url, char_code, json_path);
+      await url_csv.fetchAsJson(csv_url, char_code, json_path)
     }
     // JSONファイルから祝日データを取得
     const holiday_map = url_csv.loadHolidayJson(json_path)
@@ -154,6 +154,6 @@ export class ConsoleCalendar {
   // コンソールに出力
   output = async () => {
     const calendar = await this.#generateCalendar(this.#year, this.#month, this.#is_holiday_data_refresh)
-    console.log(calendar.outPutString);
+    console.log(calendar.outPutString)
   }
 }
