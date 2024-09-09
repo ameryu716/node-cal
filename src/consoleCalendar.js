@@ -129,15 +129,15 @@ export class ConsoleCalendar {
                 target_month.code === today.getMonth() &&
                 target_year === today.getFullYear()
               ) {
-                return chalk.yellow(day_string)
+                return chalk.yellowBright(day_string)
               }
               // isSunday
-              if (_i === 0) return chalk.red(day_string)
+              if (_i === 0) return chalk.redBright(day_string)
               // isSaturday
-              if (_i === 6) return chalk.blue(day_string)
+              if (_i === 6) return chalk.blueBright(day_string)
               // isHoliday
               if (holiday_map.has(`${target_year}/${target_month.text}/${day_number}`)) {
-                return chalk.red(day_string)
+                return chalk.redBright(day_string)
               }
               return day_string
             })
