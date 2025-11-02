@@ -46,19 +46,16 @@ export class ConsoleCalendar {
 
   // 月末の日を取得
   #getEndDayOfMonth = (date) => {
-    const _d = new Date(date)
-    _d.setMonth(_d.getMonth() + 1)
-    _d.setDate(0)
-    return _d
+    // 安全な月末の取得：年・月を明示して new Date(year, month+1, 0) とする
+    const y = date.getFullYear()
+    const m = date.getMonth()
+    return new Date(y, m + 1, 0)
   }
 
   // 月初の日を取得
   #getStartDayOfMonth = (year, month) => {
-    const _d = new Date()
-    _d.setFullYear(year)
-    _d.setMonth(month)
-    _d.setDate(1)
-    return _d
+    // 安全に年月日を指定して生成（month は 0-based）
+    return new Date(Number(year), Number(month), 1)
   }
 
   // 埋め字
